@@ -1,3 +1,4 @@
+import React from 'react';
 import { useFavorites } from '@/app/context/favorite-context';
 import { HeartIcon as HeartOutline } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';

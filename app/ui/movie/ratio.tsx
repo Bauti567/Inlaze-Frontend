@@ -1,4 +1,3 @@
-
 interface RatioProps {
   voteAverage: number;
   size: number;

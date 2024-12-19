@@ -12,7 +12,7 @@ interface FavoriteMovie {
 
 interface FavoritesContextType {
   favorites: FavoriteMovie[];
-  toggleFavorite: (movie: FavoriteMovie) => void;
+  toggleFavorite: (_movie: FavoriteMovie) => void;
 }
 
 const FavoritesContext = createContext<FavoritesContextType | undefined>(
@@ -25,7 +25,6 @@ export const FavoritesProvider = ({
   children: React.ReactNode;
 }) => {
   const [favorites, setFavorites] = useState<FavoriteMovie[]>([]);
-
   const toggleFavorite = (movie: FavoriteMovie) => {
     setFavorites((prev) => {
       const exists = prev.some((fav) => fav.id === movie.id);
@@ -36,7 +35,6 @@ export const FavoritesProvider = ({
       }
     });
   };
-
   return (
     <FavoritesContext.Provider value={{ favorites, toggleFavorite }}>
       {children}

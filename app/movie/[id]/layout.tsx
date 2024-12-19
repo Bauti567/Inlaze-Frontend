@@ -1,3 +1,4 @@
+import React from 'react';
 import { FavoritesProvider } from '@/app/context/favorite-context';
 
 export default function MovieLayout({

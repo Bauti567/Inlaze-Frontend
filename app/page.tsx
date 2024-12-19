@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FavoritesProvider } from './context/favorite-context';
 import Navbar from './ui/home/navbar';
 import Carousel from './ui/home/carousel';
@@ -27,7 +27,7 @@ export default function Page() {
         <div className="flex flex-col md:flex-row min-h-[calc(100vh-200px)]">
           <Aside setQuery={setQuery} setGenre={setSelectedGenre} />
           <div className="flex-1 p-4 md:p-8">
-            <FavoritesGrid/>
+            <FavoritesGrid />
             {Object.entries(categories).map(([key, value]) => (
               <CategorySection
                 key={key}

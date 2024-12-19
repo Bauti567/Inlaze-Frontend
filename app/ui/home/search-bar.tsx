@@ -2,7 +2,7 @@ import React from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 interface SearchBarProps {
-  onSearch: (query: string) => void;
+  onSearch: (_query: string) => void;
 }
 
 const SearchBar = ({ onSearch }: SearchBarProps) => {

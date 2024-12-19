@@ -8,7 +8,7 @@ type Genre = {
 const GenreFilter = ({
   onGenreSelect,
 }: {
-  onGenreSelect: (genre: string) => void;
+  onGenreSelect: (_genre: string) => void;
 }) => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ const GenreFilter = ({
 
   const fetchGenres = async () => {
     setLoading(true);
-    setError(null); 
+    setError(null);
     try {
       const response = await fetch(
         `https://api.themoviedb.org/3/genre/movie/list?api_key=95f50caa461c4aeecaff28e0a6458241&language=en-US`
@@ -28,7 +28,10 @@ const GenreFilter = ({
         setError('Failed to fetch genres');
       }
     } catch (error) {
-      console.error('Error fetching genres:', error);
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error('Error fetching genres:', error);
+      }
       setError('Failed to fetch genres');
     } finally {
       setLoading(false);

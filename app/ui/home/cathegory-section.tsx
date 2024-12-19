@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import MoviesGrid from '../movie/movie-card-grid';
 import PageButton from './page-button';
 import { fetchMovies } from '@/app/lib/data';
@@ -20,7 +20,7 @@ const CategorySection = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchAndSetMovies = async () => {
+  const fetchAndSetMovies = useCallback(async () => {
     setIsLoading(true);
     try {
       const allMovies = await fetchMovies(category, currentPage);
@@ -37,15 +37,15 @@ const CategorySection = ({
 
       setMovies(filteredMovies.slice(0, 10));
     } catch (error) {
-      console.error(`Error loading ${category} movies:`, error);
+      return error;
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [category, currentPage, selectedGenre, query]);
 
   useEffect(() => {
     fetchAndSetMovies();
-  }, [category, currentPage, selectedGenre, query]);
+  }, [fetchAndSetMovies]);
 
   return (
     <section className="mb-8">

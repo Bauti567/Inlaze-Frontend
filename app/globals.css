@@ -3,21 +3,16 @@
 @tailwind utilities;
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    @apply bg-gradient-to-b from-[#454545] to-[#343434] min-h-screen;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  @apply bg-gradient-to-b from-[#454545] to-[#343434] min-h-screen;
+}
 
 .movie-card-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px; 
+  gap: 16px;
 }
-
-  
-  
-
-  

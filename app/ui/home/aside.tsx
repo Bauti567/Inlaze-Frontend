@@ -1,10 +1,9 @@
-import React from 'react';
 import SearchBar from './search-bar';
 import GenreFilter from './genre-filter';
 
 interface AsideProps {
-  setQuery: (query: string) => void;
-  setGenre: (genre: string) => void;
+  setQuery: (_query: string) => void;
+  setGenre: (_genre: string) => void;
 }
 
 const Aside = ({ setQuery, setGenre }: AsideProps) => (

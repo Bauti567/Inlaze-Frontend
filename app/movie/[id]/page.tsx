@@ -11,10 +11,8 @@ import MoviesGrid from '@/app/ui/movie/movie-card-grid';
 import Breadcrumb from '@/app/ui/movie/movie-breadcrumb';
 import FavoritesGrid from '@/app/ui/movie/favorites-grid';
 
-interface PageProps {
-  params: {
-    id: string;
-  };
+export interface MovieDetailsProps {
+  params: Promise<{ id: string }>;
 }
 
 interface Actor {
@@ -23,14 +21,13 @@ interface Actor {
   character: string;
 }
 
-export default async function MovieDetails({ params }: PageProps) {
-  const { id: movieId } = params;
+export default async function MovieDetails({ params }: MovieDetailsProps) {
+  const { id } = await params;
 
   try {
-    const movie = await fetchMovieDetails(movieId);
-    const credits = await fetchMovieCredits(movieId);
-    const recommendations = await fetchMovieRecommendations(movieId);
-
+    const movie = await fetchMovieDetails(id);
+    const credits = await fetchMovieCredits(id);
+    const recommendations = await fetchMovieRecommendations(id);
     const backgroundImage = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
     const posterImage = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
@@ -51,7 +48,7 @@ export default async function MovieDetails({ params }: PageProps) {
                 releaseDate={movie.release_date}
                 runtime={movie.runtime}
               />
-              <h2 className="text-2xl font-semibold mb-2 text-lg md:text-2xl">
+              <h2 className="text-2xl font-semibold mb-2 md:text-2xl">
                 Overview
               </h2>
               <p className="text-lg text-gray-300 mb-6">{movie.overview}</p>
@@ -78,7 +75,7 @@ export default async function MovieDetails({ params }: PageProps) {
         </div>
         <div className="py-12">
           <div className="container mx-auto px-4">
-            <FavoritesGrid/>
+            <FavoritesGrid />
             <h3 className="text-2xl font-semibold mb-4 text-white">
               Recommendations
             </h3>
@@ -88,6 +85,7 @@ export default async function MovieDetails({ params }: PageProps) {
       </>
     );
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error loading movie details:', error);
     return (
       <div className="min-h-screen flex items-center justify-center text-white">
